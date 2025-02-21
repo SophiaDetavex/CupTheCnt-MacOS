@@ -18,7 +18,7 @@ int extract_cias(char *contents_path, unsigned long long *tidlist, unsigned int 
     // TODO: Replace this with something better
     char out_str[PATH_MAX - 1] = {0};
 
-    mkdir(outdir, 777);
+    mkdir(outdir, 0777);
     contents = fopen(contents_path, "rb");
 
     if (!contents) return 1;
@@ -34,7 +34,7 @@ int extract_cias(char *contents_path, unsigned long long *tidlist, unsigned int 
     }
 
     for (int i = 0; i < tidindex; i++) {
-        snprintf(out_str, PATH_MAX, "%s/%016"PRIx64".cia", outdir, tidlist[i]);
+        //snprintf(out_str, PATH_MAX, "%s/%016"PRIx64".cia", outdir, tidlist[i]);
         cia = fopen(out_str, "wb");
 		cia_size = cont_hdr->entries[i].offset_end - cont_hdr->entries[i].offset;
         contents_buf = malloc(cia_size);
@@ -43,7 +43,7 @@ int extract_cias(char *contents_path, unsigned long long *tidlist, unsigned int 
         fseek(contents, cont_hdr->entries[i].offset + sizeof(Contents_header) - 2048, SEEK_SET);
         fread(contents_buf, cia_size, 1, contents);
 
-        printf("Writing %s (%"PRIi64" KB)\n", out_str, cia_size / 1024);
+        //printf("Writing %s (%"PRIi64" KB)\n", out_str, cia_size / 1024);
         fwrite(contents_buf, cia_size, 1, cia);
         fclose(cia);
         free(contents_buf);
