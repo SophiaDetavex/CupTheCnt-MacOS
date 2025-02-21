@@ -1,4 +1,5 @@
-# CupTheCnt
+# CupTheCnt-MacOS
+# Fork by SophieDev that allows it to work fully on MacOS.
 **Usage**
 ```
   ctc <CupList> <Contents.cnt>
