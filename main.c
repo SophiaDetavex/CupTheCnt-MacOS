@@ -18,7 +18,7 @@ int extract_cias(char *contents_path, unsigned long long *tidlist, unsigned int 
     // TODO: Replace this with something better
     char out_str[PATH_MAX - 1] = {0};
 
-    mkdir(outdir, NULL);
+    mkdir(outdir, 777);
     contents = fopen(contents_path, "rb");
 
     if (!contents) return 1;
