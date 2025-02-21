@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
-
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "main.h"
 
 unsigned char cupbuf[0x800];
@@ -17,7 +18,7 @@ int extract_cias(char *contents_path, unsigned long long *tidlist, unsigned int 
     // TODO: Replace this with something better
     char out_str[PATH_MAX - 1] = {0};
 
-    mkdir(outdir);
+    mkdir(outdir, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     contents = fopen(contents_path, "rb");
 
     if (!contents) return 1;
